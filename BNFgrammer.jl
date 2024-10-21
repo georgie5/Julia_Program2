@@ -80,7 +80,7 @@ function procAssignments(userInput)
     end
 
     #count the amount of ';' in the userInput string. 
-    if count(i->(i==';'),userInput)==1
+    if count(i->(i=='='),userInput)==1
         # Single key assignment, replace <assignments> with <key-assign>
         global currderiv = replace(currderiv, "<program>"=>"         ",count=1)
         global currderiv = replace(currderiv, "<assignments>"=>"<key-assign>",count=1)
@@ -92,7 +92,7 @@ function procAssignments(userInput)
             return false  # If keyAssignDeriv fails, terminate the derivation
          end
 
-    elseif count(i->(i==';'),userInput)>=1 
+    elseif count(i->(i=='='),userInput)>=1 
         # Multiple key assignments, replace <assignments> with <key-assign><assignments>
         global currderiv = replace(currderiv, "<program>"=>"         ",count=1)
         global currderiv = replace(currderiv, "<assignments>"=>"<key-assign><assignments>",count=1)
@@ -135,7 +135,7 @@ function keyAssignDeriv(userInput)
     # Split the key assignment into key and movement
     parts = split(userInput, "=")
     if length(parts) != 2
-        println("Invalid key-assignment format: '$userInput'")
+        println("Invalid key-assignment format make sure key-assign ends with ';' ")
         return false
     end
 
